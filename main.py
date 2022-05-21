@@ -102,8 +102,24 @@ class FoodController:
     def add_restaurant(self) -> None:
         name = input("Restaurant name: ")
         category = int(input("Restaurant category: "))
-        new_food = Food(name, category)
-        self.food_list.populate_restaurant(new_food)
+        result = self.food_list.find_restaurant(name)
+        confirmation = False
+
+
+        if result is not None:
+            print(f"Found existing restaurant {result.get_name()} of category {result.get_category()}.")
+            inp = input("Are you sure you want to add this restaurant? (y/n)")
+            if inp == 'y':
+                print("Confirmation received.")
+                confirmation = True
+            else:
+                print("Confirmation not received.")
+        else:
+            confirmation = True
+
+        if confirmation:
+            new_food = Food(name, category)
+            self.food_list.populate_restaurant(new_food)
 
     # MENU OPT 4 MAIN:
     def edit_restaurant(self) -> None:

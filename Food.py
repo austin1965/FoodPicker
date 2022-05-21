@@ -18,6 +18,9 @@ class Food:
     def set_category(self, category: int) -> None:
         self.__category = self.__populate_category(category)
 
+    def get_category_int(self) -> int:
+        return self.__category.value
+
     def get_name(self) -> str:
         return self.__name
 

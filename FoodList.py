@@ -1,5 +1,8 @@
 from typing import List
 import re
+
+import openpyxl
+import pandas
 import pandas as pd
 from Food import Food
 
@@ -8,15 +11,14 @@ RESTAURANT_FILE = 'food_list.xlsx'
 class FoodList:
     # Constructor
     def __init__(self):
-        self.source_file = RESTAURANT_FILE
+        self.source_file = pd.read_excel(RESTAURANT_FILE)
         self.food_list = self.read_food_list()
 
     # Facilitates creation of food list from external input source
     def read_food_list(self) -> List[Food]:
-        food_df = pd.read_excel(self.source_file)
         food_list = []
 
-        for column, row in food_df.items():
+        for column, row in self.source_file.items():
             if column.lower() == "restaurant":
                 for restaurant in list(row):
                     food_list.append(Food(restaurant))
@@ -49,8 +51,13 @@ class FoodList:
 
         return None
 
-
-
     def populate_restaurant(self, new_restaurant: Food) -> None:
-        print("populate_restaurant: FIXME")
+        self.food_list.append(new_restaurant)
+
+        temp_df = pd.DataFrame([[new_restaurant.get_name(), new_restaurant.get_category_int()]],
+                               index=[len(self.source_file)],
+                               columns=['Restaurant', 'Category'])
+
+        self.source_file = pd.concat([self.source_file, temp_df])
+        self.source_file.to_excel(RESTAURANT_FILE)
 
