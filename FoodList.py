@@ -1,4 +1,5 @@
 from typing import List
+import re
 import pandas as pd
 from Food import Food
 
@@ -14,6 +15,7 @@ class FoodList:
     def read_food_list(self) -> List[Food]:
         food_df = pd.read_excel(self.source_file)
         food_list = []
+
         for column, row in food_df.items():
             if column.lower() == "restaurant":
                 for restaurant in list(row):
@@ -34,6 +36,21 @@ class FoodList:
 
         return sub_list
 
-    def populate_restaurant(self, restaurant: Food) -> None:
+    def find_restaurant(self, lookup_restaurant: str) -> Food or None:
+        name_for_compare = lookup_restaurant.lower()
+        name_for_compare = re.sub('[^0-9a-zA-Z]+', '', name_for_compare)
+
+        for restaurant in self.food_list:
+            temp_name = restaurant.get_name().lower()
+            temp_name = re.sub('[^0-9a-zA-Z]+', '', temp_name)
+
+            if name_for_compare in temp_name:
+                return restaurant
+
+        return None
+
+
+
+    def populate_restaurant(self, new_restaurant: Food) -> None:
         print("populate_restaurant: FIXME")
 

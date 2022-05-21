@@ -63,6 +63,7 @@ class FoodController:
 
         while user_inputting:
             input_value = input("Input the category numbers you want, press Q to exit: ")
+
             if input_value in total_categories:
                 if input_value not in user_categories:
                     user_categories.append(input_value)
@@ -89,7 +90,13 @@ class FoodController:
 
     # MENU OPT 2 MAIN:
     def search_restaurant(self) -> None:
-        print("search_restaurant: FIXME")
+        lookup = input("Provide restaurant to lookup: ")
+        result = self.food_list.find_restaurant(lookup)
+
+        if result:
+            print(f"{lookup} closest match is {result.get_name()} of category {result.get_category()}.")
+        else:
+            print(f"{lookup} is not in food list. {result} found.")
 
     # MENU OPT 3 MAIN: Facilitates creating new food objects for external input source.
     def add_restaurant(self) -> None:
