@@ -105,7 +105,6 @@ class FoodController:
         result = self.food_list.find_restaurant(name)
         confirmation = False
 
-
         if result is not None:
             print(f"Found existing restaurant {result.get_name()} of category {result.get_category()}.")
             inp = input("Are you sure you want to add this restaurant? (y/n)")
@@ -123,7 +122,38 @@ class FoodController:
 
     # MENU OPT 4 MAIN:
     def edit_restaurant(self) -> None:
-        print("edit_restaurant: FIXME")
+        name = input("Provide name of restaurant you want to edit: ")
+        result = self.food_list.find_restaurant(name)
+
+        if result:
+            print(f"Found restaurant - Name = {result.get_name()}; Category = {result.get_category()}")
+
+            name_choice = input("Do you want a new name for this restaurant? (y/n)")
+            if name_choice.lower() == "y":
+                new_name = input("New restaurant name: ")
+
+            category_choice = input("Do you want a new category for this restaurant? (y/n)")
+            if category_choice.lower() == "y":
+                new_category = int(input("New category type: "))
+
+            new_food = Food()
+            if name_choice.lower() == "y" or category_choice.lower() == "y":
+                if name_choice.lower() == "y" and category_choice.lower() == "y":
+                    new_food = Food(new_name, new_category)
+                    self.food_list.populate_restaurant(new_food)
+                elif name_choice.lower() == "y" and category_choice.lower() == "n":
+                    new_food = Food(new_name, result.get_category_int())
+                    self.food_list.populate_restaurant(new_food)
+                elif name_choice.lower() == "n" and category_choice.lower() == "y":
+                    new_food = Food(result.get_name(), new_category)
+                    self.food_list.populate_restaurant(new_food)
+                print(f"Previously: {result.get_name()}: {result.get_category()}")
+                print(f"Edited to: {new_food.get_name()}: {new_food.get_category()}")
+            else:
+                print("Returning to menu\n")
+
+        else:
+            print("No restaurant with this name found.")
 
 
 if __name__ == '__main__':
