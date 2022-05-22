@@ -55,9 +55,14 @@ class FoodList:
         self.food_list.append(new_restaurant)
 
         temp_df = pd.DataFrame([[new_restaurant.get_name(), new_restaurant.get_category_int()]],
-                               index=[len(self.source_file)],
                                columns=['Restaurant', 'Category'])
 
-        self.source_file = pd.concat([self.source_file, temp_df])
+        self.source_file = pd.concat([self.source_file, temp_df], ignore_index=True)
         self.source_file.to_excel(RESTAURANT_FILE)
 
+    def delete_restaurant(self, rest_to_del: Food) -> None:
+        self.food_list.remove(rest_to_del)
+        i = self.source_file[self.source_file["Restaurant"] == rest_to_del.get_name()].index.values
+        self.source_file = self.source_file.drop(self.source_file.index[i])
+        print(self.source_file)
+        self.source_file.to_excel(RESTAURANT_FILE)

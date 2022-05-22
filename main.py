@@ -34,17 +34,21 @@ class FoodController:
             elif user_input == '4':
                 self.edit_restaurant()
             elif user_input == '5':
+                self.delete_restaurant()
+            elif user_input == '6':
                 picking_food = False
             else:
                 print("Invalid input.")
 
     # Outputs main menu choices
     def print_menu(self) -> None:
+        print()
         print("1. Pick Restaurant")
         print("2. Search Restaurant")
         print("3. Add Restaurant")
         print("4. Edit Restaurant")
-        print("5. Exit")
+        print("5. Delete Restaurant")
+        print("6. Exit")
 
     # MENU OPT 1 MAIN: Facilitates restaurant selection process.
     def pick_restaurant(self) -> None:
@@ -154,6 +158,15 @@ class FoodController:
 
         else:
             print("No restaurant with this name found.")
+
+    def delete_restaurant(self):
+        name = input("Provide name of restaurant you want to delete: ")
+        result = self.food_list.find_restaurant(name)
+
+        if result:
+            self.food_list.delete_restaurant(result)
+        else:
+            print(f"Cannot find restaurant with name {name}")
 
 
 if __name__ == '__main__':
