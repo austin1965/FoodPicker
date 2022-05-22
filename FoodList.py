@@ -72,6 +72,5 @@ class FoodList:
         self.food_list.remove(rest_to_del)
         i = self.source_file[self.source_file["Restaurant"] == rest_to_del.get_name()].index.values
         self.source_file = self.source_file.drop(self.source_file.index[i])
-        print(self.source_file)
         self.source_file.to_excel(RESTAURANT_FILE)
 
