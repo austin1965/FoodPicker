@@ -92,7 +92,7 @@ class FoodController:
 
         return cat_obj_list
 
-    # MENU OPT 2 MAIN:
+    # MENU OPT 2 MAIN: Facilitates lookup of specific restaurant names.
     def search_restaurant(self) -> None:
         lookup = input("Provide restaurant to lookup: ")
         result = self.food_list.find_restaurant(lookup)
@@ -124,7 +124,7 @@ class FoodController:
             new_food = Food(name, category)
             self.food_list.populate_restaurant(new_food)
 
-    # MENU OPT 4 MAIN:
+    # MENU OPT 4 MAIN: Facilitates editing restaurants with a specific name.
     def edit_restaurant(self) -> None:
         name = input("Provide name of restaurant you want to edit: ")
         result = self.food_list.find_restaurant(name)
@@ -159,7 +159,8 @@ class FoodController:
         else:
             print("No restaurant with this name found.")
 
-    def delete_restaurant(self):
+    # Facilitates deleting restaurants with a specific name.
+    def delete_restaurant(self) -> None:
         name = input("Provide name of restaurant you want to delete: ")
         result = self.food_list.find_restaurant(name)
 

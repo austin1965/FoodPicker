@@ -1,13 +1,17 @@
+# --------------- Dependencies --------------- #
 from typing import List
 import re
-
-import openpyxl
-import pandas
 import pandas as pd
 from Food import Food
 
+# --------------- Constants --------------- #
 RESTAURANT_FILE = 'food_list.xlsx'
 
+
+# --------------- Classes --------------- #
+
+
+# Provides abstraction layer for interfacing with external data source and list of food objects.
 class FoodList:
     # Constructor
     def __init__(self):
@@ -28,6 +32,7 @@ class FoodList:
 
         return food_list
 
+    # Generates a sublist of the larger food list member filtered down by categories provided.
     def make_sub_list(self, category_list: List[str]) -> List[Food]:
         sub_list = []
 
@@ -38,6 +43,7 @@ class FoodList:
 
         return sub_list
 
+    # Performs lookup by of a particular restaurant.
     def find_restaurant(self, lookup_restaurant: str) -> Food or None:
         name_for_compare = lookup_restaurant.lower()
         name_for_compare = re.sub('[^0-9a-zA-Z]+', '', name_for_compare)
@@ -51,6 +57,7 @@ class FoodList:
 
         return None
 
+    # Adds new restaurant to external data source and ephemeral food list.
     def populate_restaurant(self, new_restaurant: Food) -> None:
         self.food_list.append(new_restaurant)
 
@@ -60,9 +67,11 @@ class FoodList:
         self.source_file = pd.concat([self.source_file, temp_df], ignore_index=True)
         self.source_file.to_excel(RESTAURANT_FILE)
 
+    # Removes a restaurant from external data source and ephemeral food list
     def delete_restaurant(self, rest_to_del: Food) -> None:
         self.food_list.remove(rest_to_del)
         i = self.source_file[self.source_file["Restaurant"] == rest_to_del.get_name()].index.values
         self.source_file = self.source_file.drop(self.source_file.index[i])
         print(self.source_file)
         self.source_file.to_excel(RESTAURANT_FILE)
+

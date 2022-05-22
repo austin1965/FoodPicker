@@ -1,6 +1,11 @@
+# --------------- Dependencies --------------- #
 from enum import Enum, unique
 
 
+# --------------- Classes --------------- #
+
+
+# Represents potential categories food can take on.
 @unique
 class Category(Enum):
     # Values
@@ -13,7 +18,7 @@ class Category(Enum):
 
     # Outputs potential categories
     @classmethod
-    def print_categories(cls):
+    def print_categories(cls) -> None:
         print("Categories: ")
         for name, member in Category.__members__.items():
             print(f"{member.value}. {name}")
