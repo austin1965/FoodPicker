@@ -42,7 +42,7 @@ class FoodController:
                 print("Invalid input.")
 
     @staticmethod
-    def print_menu(self) -> None:
+    def print_menu() -> None:
         """ Outputs main menu choices. """
 
         print()
@@ -86,7 +86,7 @@ class FoodController:
         return self.category_int_mapper(user_categories)
 
     @staticmethod
-    def category_int_mapper(self, str_categories: List[str]) -> List[str]:
+    def category_int_mapper(str_categories: List[str]) -> List[str]:
         """ MENU OPT 1 HELPER: Maps user input category strings to integers to category names. """
 
         int_categories = [int(x) for x in str_categories]
