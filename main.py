@@ -9,14 +9,14 @@ from food_list import FoodList
 # --------------- Classes --------------- #
 
 
-# Class controls the selection of food and input / output of food list
+""" Class controls the selection of food and input / output of food list. """
 class FoodController:
 
-    # Constructor
+    """ Constructor. """
     def __init__(self):
         self.food_list = FoodList()
 
-    # Runs main menu and user menu selection.
+    """ Runs main menu and user menu selection. """
     def food_picker_main(self) -> None:
         picking_food = True
 
@@ -40,7 +40,7 @@ class FoodController:
             else:
                 print("Invalid input.")
 
-    # Outputs main menu choices
+    """ Outputs main menu choices. """
     def print_menu(self) -> None:
         print()
         print("1. Pick Restaurant")
@@ -50,14 +50,14 @@ class FoodController:
         print("5. Delete Restaurant")
         print("6. Exit")
 
-    # MENU OPT 1 MAIN: Facilitates restaurant selection process.
+    """ MENU OPT 1 MAIN: Facilitates restaurant selection process. """
     def pick_restaurant(self) -> None:
         categories = self.category_picker()
         food_sub_list = self.food_list.make_sub_list(categories)
         decision = choice(food_sub_list)
         print(f"Decided on restaurant... {decision.get_name()}\n")
 
-    # MENU OPT 1 HELPER: Facilitates user category selection.
+    """ MENU OPT 1 HELPER: Facilitates user category selection. """
     def category_picker(self) -> List[str]:
         total_categories = [str(member.value) for name, member in Category.__members__.items()]
         user_categories = []
@@ -80,7 +80,7 @@ class FoodController:
 
         return self.category_int_mapper(user_categories)
 
-    # MENU OPT 1 HELPER: Maps user input category strings to integers to category names.
+    """ MENU OPT 1 HELPER: Maps user input category strings to integers to category names. """
     def category_int_mapper(self, str_categories: List[str]) -> List[str]:
         int_categories = [int(x) for x in str_categories]
         cat_obj_list = []
@@ -92,7 +92,7 @@ class FoodController:
 
         return cat_obj_list
 
-    # MENU OPT 2 MAIN: Facilitates lookup of specific restaurant names.
+    """ MENU OPT 2 MAIN: Facilitates lookup of specific restaurant names. """
     def search_restaurant(self) -> None:
         lookup = input("Provide restaurant to lookup: ")
         result = self.food_list.find_restaurant(lookup)
@@ -102,7 +102,7 @@ class FoodController:
         else:
             print(f"{lookup} is not in food list. {result} found.")
 
-    # MENU OPT 3 MAIN: Facilitates creating new food objects for external input source.
+    """ MENU OPT 3 MAIN: Facilitates creating new food objects for external input source. """
     def add_restaurant(self) -> None:
         name = input("Restaurant name: ")
         category = int(input("Restaurant category: "))
@@ -124,7 +124,7 @@ class FoodController:
             new_food = Food(name, category)
             self.food_list.populate_restaurant(new_food)
 
-    # MENU OPT 4 MAIN: Facilitates editing restaurants with a specific name.
+    """ MENU OPT 4 MAIN: Facilitates editing restaurants with a specific name. """
     def edit_restaurant(self) -> None:
         name = input("Provide name of restaurant you want to edit: ")
         result = self.food_list.find_restaurant(name)
@@ -159,7 +159,7 @@ class FoodController:
         else:
             print("No restaurant with this name found.")
 
-    # Facilitates deleting restaurants with a specific name.
+    """ MENU OPT 5 MAIN: Facilitates deleting restaurants with a specific name. """
     def delete_restaurant(self) -> None:
         name = input("Provide name of restaurant you want to delete: ")
         result = self.food_list.find_restaurant(name)

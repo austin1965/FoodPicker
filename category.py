@@ -5,7 +5,7 @@ from enum import Enum, unique
 # --------------- Classes --------------- #
 
 
-# Represents potential categories food can take on.
+""" Represents potential categories food can take on. """
 @unique
 class Category(Enum):
     # Values
@@ -16,7 +16,7 @@ class Category(Enum):
     ALCOHOL = 5
     BREAKFAST = 6
 
-    # Outputs potential categories
+    """ Outputs potential categories. """
     @classmethod
     def print_categories(cls) -> None:
         print("Categories: ")
