@@ -47,7 +47,6 @@ class FoodController:
                 case _:
                     console.print("[bold red]Invalid Input")
 
-    @static_method
     def print_menu(self) -> None:
         """Outputs main menu choices."""
         console.print(
@@ -86,11 +85,12 @@ class FoodController:
         """MENU OPT 1 MAIN: Facilitates restaurant selection process."""
 
         categories = self.category_picker()
-        food_sub_list = self.food_list.make_sub_list(categories)
-        decision = choice(food_sub_list)
-        print(f"Decided on restaurant... {decision.get_name()}\n")
+        if categories:
+            food_sub_list = self.food_list.make_sub_list(categories)
+            decision = choice(food_sub_list)
+            print(f"Decided on restaurant... {decision.get_name()}\n")
 
-    def category_picker(self) -> List[str]:
+    def category_picker(self) -> List[str] | None:
         """MENU OPT 1 HELPER: Facilitates user category selection."""
 
         total_categories = [
@@ -110,18 +110,19 @@ class FoodController:
                 if input_value not in user_categories:
                     user_categories.append(input_value)
                 else:
-                    print("Selection already made:")
+                    console.print("[blue]Selection already made")
             elif input_value.upper() == "Q":
                 user_inputting = False
             else:
                 print("Invalid selection")
+        print(user_categories)
+        if user_categories:
+            return self.category_int_mapper(user_categories)
+        else:
+            self.print_menu()
 
-        return self.category_int_mapper(user_categories)
-
-
-    @staticmethod
-    def category_int_mapper(str_categories: List[str]) -> List[str]:
-        """ MENU OPT 1 HELPER: Maps user input category strings to integers to category names. """
+    def category_int_mapper(self, str_categories: List[str]) -> List[str]:
+        """MENU OPT 1 HELPER: Maps user input category strings to integers to category names."""
 
         int_categories = [int(x) for x in str_categories]
         cat_obj_list = []
