@@ -18,7 +18,7 @@ class Food:
     def __populate_category(category: int) -> Category:
         """ Populates food object category member based on input integer. """
 
-        for name, member in Category.__members__.items():
+        for _, member in Category.__members__.items():
             if member.value == category:
                 return Category(member)
 
