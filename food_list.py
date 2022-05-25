@@ -30,7 +30,7 @@ class FoodList:
                 for restaurant in list(row):
                     food_list.append(Food(restaurant))
             if column.lower() == "category":
-                for i, _ in enumerate(food_list):
+                for i in range(len(food_list)):
                     food_list[i].set_category(row[i])
 
         return food_list
