@@ -47,6 +47,7 @@ class FoodController:
                 case _:
                     console.print("[bold red]Invalid Input")
 
+    @static_method
     def print_menu(self) -> None:
         """Outputs main menu choices."""
         console.print(
@@ -117,8 +118,10 @@ class FoodController:
 
         return self.category_int_mapper(user_categories)
 
-    def category_int_mapper(self, str_categories: List[str]) -> List[str]:
-        """MENU OPT 1 HELPER: Maps user input category strings to integers to category names."""
+
+    @staticmethod
+    def category_int_mapper(str_categories: List[str]) -> List[str]:
+        """ MENU OPT 1 HELPER: Maps user input category strings to integers to category names. """
 
         int_categories = [int(x) for x in str_categories]
         cat_obj_list = []
