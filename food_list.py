@@ -2,7 +2,7 @@
 from typing import List
 import re
 import pandas as pd
-from Food import Food
+from food import Food
 
 # --------------- Constants --------------- #
 RESTAURANT_FILE = 'food_list.xlsx'

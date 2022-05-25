@@ -1,5 +1,5 @@
 # --------------- Dependencies --------------- #
-from Category import Category
+from category import Category
 
 
 # --------------- Classes --------------- #

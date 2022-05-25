@@ -1,9 +1,9 @@
 # --------------- Dependencies --------------- #
 from random import choice
 from typing import List
-from Category import Category
-from Food import Food
-from FoodList import FoodList
+from category import Category
+from food import Food
+from food_list import FoodList
 
 
 # --------------- Classes --------------- #
