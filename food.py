@@ -5,7 +5,6 @@ from category import Category
 # --------------- Classes --------------- #
 
 
-
 class Food:
     """ Represents a restaurant. """
 
@@ -15,6 +14,7 @@ class Food:
         self.__name = name
         self.__category = self.__populate_category(category)
 
+    @staticmethod
     def __populate_category(self, category: int) -> Category:
         """ Populates food object category member based on input integer. """
 
