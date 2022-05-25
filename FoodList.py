@@ -44,7 +44,7 @@ class FoodList:
         return sub_list
 
     # Performs lookup by of a particular restaurant.
-    def find_restaurant(self, lookup_restaurant: str) -> Food or None:
+    def find_restaurant(self, lookup_restaurant: str) -> Food | None:
         name_for_compare = lookup_restaurant.lower()
         name_for_compare = re.sub('[^0-9a-zA-Z]+', '', name_for_compare)
 
